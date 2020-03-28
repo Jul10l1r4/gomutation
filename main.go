@@ -79,6 +79,22 @@ func inverter(word string) string {
 	}
 	return string(runes)
 }
+func mess(word string, all_list []string) []string {
+	list := []string {}
+	for _, i := range all_list {
+		list = append(list, word + i)
+	}
+	return list
+}
+func combine(all_list []string) []string {
+	final_words := []string {}
+
+	for _, i := range all_list {
+		final_words = append(final_words, mess(i, all_list)...)
+	}
+
+	return final_words
+}
 
 func main() {
 	final_content := []string {}
@@ -89,6 +105,8 @@ func main() {
 
 	// Running functions for make wordlist
 	for _, word := range content {
+		final_content = content
+		final_content = append(final_content, combine(content)...)
 		final_content = append(final_content, leet(word))
 		final_content = append(final_content, count1(word))
 		final_content = append(final_content, count2(word))
