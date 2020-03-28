@@ -1,7 +1,5 @@
 # GOMutation
-Make combinations for make wordlist based in words keys
-
-[Se some operations](https://owasp.org/www-project-d4n155/#div-operations)
+Make combinations for make wordlist based in words file
 
 ## USE
 ```cli
