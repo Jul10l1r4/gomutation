@@ -91,11 +91,10 @@ func main() {
 	blob, err := ioutil.ReadFile(os.Args[1])
 	check(err)
 	content := strings.Fields(string(blob))
+	finalContent = append(content, combine(content)...)
 
 	// Running functions for make wordlist
 	for _, word := range content {
-		finalContent = content
-		finalContent = append(finalContent, combine(content)...)
 		finalContent = append(finalContent, leet(word))
 		finalContent = append(finalContent, count1to8(word)...)
 		finalContent = append(finalContent, year90(word)...)
