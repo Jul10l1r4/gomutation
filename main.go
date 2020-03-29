@@ -5,6 +5,7 @@ import (
 	"strings"
 	"io/ioutil"
 	"os"
+	"strconv"
 )
 // Check if err
 func check(e error) {
@@ -29,24 +30,34 @@ func unique(intSlice []string) []string {
 func leet(word string) string {
 	return strings.NewReplacer("A","4", "E", "3", "I", "1", "O", "0", "S", "5", "T", "7", "B", "8").Replace(word)
 }
-func count1(word string) string {
-	return word+"1"
+func wl(word string) []string{
+	n:=1
+	o:="-"
+	list := []string {}
+	for n<=10 {
+		o = strconv.Itoa(n)
+		fmt.Println(o)
+		list=append(list,word+o)
+
+	}
+	return list
 }
-func count2(word string) string {
-	return word+"12"
-}
-func count3(word string) string {
-	return word+"123"
-}
-func count4(word string) string {
-	return word+"1234"
-}
-func count8(word string) string {
-	return word+"12345678"
-}
-func count81(word string) string {
-	return word+"87654321"
-}
+
+//func count2(word string) string {
+//return word+"12"
+//}
+//func count3(word string) string {
+//	return word+"123"
+//}
+//func count4(word string) string {
+//	return word+"1234"
+//}
+//func count8(word string) string {
+//	return word+"12345678"
+//}
+//func count81(word string) string {
+//	return word+"87654321"
+//}
 func year16(word string) string {
 	return word+"2016"
 }
@@ -108,13 +119,13 @@ func main() {
 		final_content = content
 		final_content = append(final_content, combine(content)...)
 		final_content = append(final_content, leet(word))
-		final_content = append(final_content, count1(word))
-		final_content = append(final_content, count2(word))
-		final_content = append(final_content, count3(word))
-		final_content = append(final_content, count4(word))
-		final_content = append(final_content, count8(word))
-		final_content = append(final_content, count81(word))
-		final_content = append(final_content, count81(word))
+		final_content = append(final_content, wl(word))
+		//final_content = append(final_content, count2(word))
+		//final_content = append(final_content, count3(word))
+		//final_content = append(final_content, count4(word))
+		//final_content = append(final_content, count8(word))
+		//final_content = append(final_content, count81(word))
+		//final_content = append(final_content, count81(word))
 		final_content = append(final_content, year16(word))
 		final_content = append(final_content, year17(word))
 		final_content = append(final_content, year18(word))
