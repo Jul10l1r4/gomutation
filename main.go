@@ -30,48 +30,26 @@ func unique(intSlice []string) []string {
 func leet(word string) string {
 	return strings.NewReplacer("A","4", "E", "3", "I", "1", "O", "0", "S", "5", "T", "7", "B", "8").Replace(word)
 }
-func wl(word string) []string{
-	n:=1
-	o:="-"
-	list := []string {}
-	for n<=10 {
-		o = strconv.Itoa(n)
-		fmt.Println(o)
-		list=append(list,word+o)
-
-	}
-	return list
+func count1to8(word string) []string {
+        list := []string {word}
+        for i := 0; i < 9; i++ {
+                list = append(list,list[len(list)-1]+strconv.Itoa(i))
+        }
+        return list
 }
-
-//func count2(word string) string {
-//return word+"12"
-//}
-//func count3(word string) string {
-//	return word+"123"
-//}
-//func count4(word string) string {
-//	return word+"1234"
-//}
-//func count8(word string) string {
-//	return word+"12345678"
-//}
-//func count81(word string) string {
-//	return word+"87654321"
-//}
-func year16(word string) string {
-	return word+"2016"
+func year90(word string) []string {
+        list := []string {word}
+        for i := 99; i > 89; i-- {
+                list = append(list,word+strconv.Itoa(i))
+        }
+        return list
 }
-func year17(word string) string {
-	return word+"2017"
-}
-func year18(word string) string {
-	return word+"2018"
-}
-func year19(word string) string {
-	return word+"2019"
-}
-func year20(word string) string {
-	return word+"2020"
+func year2000(word string) []string {
+        list := []string {word}
+        for i := 2020; i > 1999; i-- {
+                list = append(list,word+strconv.Itoa(i))
+        }
+        return list
 }
 func swapCase(r rune) rune {
     switch {
@@ -119,18 +97,9 @@ func main() {
 		final_content = content
 		final_content = append(final_content, combine(content)...)
 		final_content = append(final_content, leet(word))
-		final_content = append(final_content, wl(word))
-		//final_content = append(final_content, count2(word))
-		//final_content = append(final_content, count3(word))
-		//final_content = append(final_content, count4(word))
-		//final_content = append(final_content, count8(word))
-		//final_content = append(final_content, count81(word))
-		//final_content = append(final_content, count81(word))
-		final_content = append(final_content, year16(word))
-		final_content = append(final_content, year17(word))
-		final_content = append(final_content, year18(word))
-		final_content = append(final_content, year19(word))
-		final_content = append(final_content, year20(word))
+		final_content = append(final_content, count1to8(word)...)
+		final_content = append(final_content, year90(word)...)
+		final_content = append(final_content, year2000(word)...)
 		final_content = append(final_content, strings.ToUpper(word))
 		final_content = append(final_content, strings.ToLower(word))
 		final_content = append(final_content, strings.Map(swapCase, word))
