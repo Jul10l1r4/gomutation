@@ -68,25 +68,25 @@ func inverter(word string) string {
 	}
 	return string(runes)
 }
-func mess(word string, all_list []string) []string {
+func mess(word string, allList []string) []string {
 	list := []string {}
-	for _, i := range all_list {
+	for _, i := range allList {
 		list = append(list, word + i)
 	}
 	return list
 }
-func combine(all_list []string) []string {
-	final_words := []string {}
+func combine(allList []string) []string {
+	finalWords := []string {}
 
-	for _, i := range all_list {
-		final_words = append(final_words, mess(i, all_list)...)
+	for _, i := range allList {
+		finalWords = append(finalWords, mess(i, allList)...)
 	}
 
-	return final_words
+	return finalWords
 }
 
 func main() {
-	final_content := []string {}
+	finalContent := []string {}
 	// Read base file
 	blob, err := ioutil.ReadFile(os.Args[1])
 	check(err)
@@ -94,24 +94,24 @@ func main() {
 
 	// Running functions for make wordlist
 	for _, word := range content {
-		final_content = content
-		final_content = append(final_content, combine(content)...)
-		final_content = append(final_content, leet(word))
-		final_content = append(final_content, count1to8(word)...)
-		final_content = append(final_content, year90(word)...)
-		final_content = append(final_content, year2000(word)...)
-		final_content = append(final_content, strings.ToUpper(word))
-		final_content = append(final_content, strings.ToLower(word))
-		final_content = append(final_content, strings.Map(swapCase, word))
-		final_content = append(final_content, inverter(word))
+		finalContent = content
+		finalContent = append(finalContent, combine(content)...)
+		finalContent = append(finalContent, leet(word))
+		finalContent = append(finalContent, count1to8(word)...)
+		finalContent = append(finalContent, year90(word)...)
+		finalContent = append(finalContent, year2000(word)...)
+		finalContent = append(finalContent, strings.ToUpper(word))
+		finalContent = append(finalContent, strings.ToLower(word))
+		finalContent = append(finalContent, strings.Map(swapCase, word))
+		finalContent = append(finalContent, inverter(word))
 	}
 
 	// Save data
-	file, err_create := os.Create(os.Args[2])
-	check(err_create)
+	file, errCreate := os.Create(os.Args[2])
+	check(errCreate)
 	defer file.Close()
-	data := []byte(strings.Join(unique(final_content), "\n"))
-	number_wrote, err_write := file.Write(data)
-	check(err_write)
-	fmt.Printf("File saved in %s: %db\n", os.Args[2], number_wrote)
+	data := []byte(strings.Join(unique(finalContent), "\n"))
+	numberWrote, errWrite := file.Write(data)
+	check(errWrite)
+	fmt.Printf("File saved in %s: %db\n", os.Args[2], numberWrote)
 }
