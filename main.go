@@ -7,12 +7,14 @@ import (
 	"os"
 	"strconv"
 )
+
 // Check if err
 func check(e error) {
     if e != nil {
         panic(e)
     }
 }
+
 // Removing duplicated items
 func unique(intSlice []string) []string {
     keys := make(map[string]bool)
@@ -28,11 +30,12 @@ func unique(intSlice []string) []string {
 
 // Pure functions
 func leet(word string) string {
-	return strings.NewReplacer("A","4", "E", "3", "I", "1", "O", "0", "S", "5", "T", "7", "B", "8").Replace(word)
+	return strings.NewReplacer("A","4", "E", "3", "I", "1", "O", "0", "S", "5", "T", "7", "B", "8",
+                                    "a","4", "e", "3", "i", "1", "o", "0", "s", "5", "t", "7", "b", "8").Replace(word)
 }
 func count1to8(word string) []string {
         list := []string {word}
-        for i := 1; i < 9; i++ {
+        for i := 0; i < 9; i++ {
                 list = append(list,list[len(list)-1]+strconv.Itoa(i))
         }
         return list
@@ -46,7 +49,7 @@ func year90(word string) []string {
 }
 func year2000(word string) []string {
         list := []string {word}
-        for i := 2020; i > 1999; i-- {
+        for i := 2024; i > 1999; i-- {
                 list = append(list,word+strconv.Itoa(i))
         }
         return list
@@ -91,11 +94,17 @@ func main() {
 	blob, err := ioutil.ReadFile(os.Args[1])
 	check(err)
 	content := strings.Fields(string(blob))
+
+  // Combinatory expression out context of loop. But work finalContent
 	finalContent = append(content, combine(content)...)
+
+  // Leet after input in loop
+  for _, word:= range finalContent {
+    content = append(finalContent, leet(word))
+  }
 
 	// Running functions for make wordlist
 	for _, word := range content {
-		finalContent = append(finalContent, leet(word))
 		finalContent = append(finalContent, count1to8(word)...)
 		finalContent = append(finalContent, year90(word)...)
 		finalContent = append(finalContent, year2000(word)...)
@@ -113,4 +122,7 @@ func main() {
 	numberWrote, errWrite := file.Write(data)
 	check(errWrite)
 	fmt.Printf("File saved in %s: %db\n", os.Args[2], numberWrote)
+	if numberWrote < 1 {
+		fmt.Println("1b?")
+	}
 }
