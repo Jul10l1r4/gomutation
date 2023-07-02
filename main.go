@@ -35,7 +35,7 @@ func leet(word string) string {
 }
 func count1to8(word string) []string {
         list := []string {word}
-        for i := 0; i < 9; i++ {
+        for i := 1; i < 9; i++ {
                 list = append(list,list[len(list)-1]+strconv.Itoa(i))
         }
         return list
